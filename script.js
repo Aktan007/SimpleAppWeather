@@ -5,8 +5,8 @@ const form = document.getElementById('search-form');
 const cityInput = document.getElementById('city-input');
 const cardsContainer = document.getElementById('cards');
 const unitToggle = document.getElementById('unit-toggle');
+const errorMsg = document.getElementById('error-msg');
 
-// Состояние приложения
 let isCelsius = true;
 let citiesData = [];
 
@@ -22,7 +22,14 @@ const loadCities = () => {
   return saved ? JSON.parse(saved) : [];
 };
 
-// Конвертация температуры
+const showError = (message) => {
+  errorMsg.textContent = message;
+  errorMsg.classList.add('visible');
+  setTimeout(() => {
+    errorMsg.classList.remove('visible');
+  }, 3000);
+};
+
 const toFahrenheit = (celsius) => Math.round(celsius * 9 / 5 + 32);
 const getTemp = (tempC) => isCelsius ? Math.round(tempC) : toFahrenheit(tempC);
 const getUnit = () => isCelsius ? '°C' : '°F';
@@ -130,12 +137,23 @@ form.addEventListener('submit', async (event) => {
 
   try {
     const weather = await fetchWeather(city);
+    
+    // Проверка на дубликат
+    const isDuplicate = citiesData.some(
+      (c) => c.id === weather.id || c.name.toLowerCase() === weather.name.toLowerCase()
+    );
+    if (isDuplicate) {
+      showError(`${weather.name} уже добавлен`);
+      cityInput.value = '';
+      return;
+    }
+
     citiesData.push(weather);
     saveCities();
     renderAllCards();
     cityInput.value = '';
   } catch (error) {
-    cardsContainer.appendChild(createErrorCard(error.message));
+    showError(error.message);
   }
 });
 

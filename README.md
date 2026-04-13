@@ -4,15 +4,11 @@
 
 ## Как запустить
 
-1. Установи ключ OpenWeatherMap.
-   - Зарегистрируйся на https://openweathermap.org/.
-   - Скопируй API Key.
-   - В `script.js` замени `API_KEY` на свой ключ.
-3. Запусти простой сервер, желательно на Ubuntu WSL:
+1. Запусти простой сервер, желательно на Ubuntu WSL:
    ```bash
    python3 -m http.server 8000
    ```
-4. Открой в браузере:
+2. Открой в браузере:
    ```bash
    explorer.exe http://localhost:8000
    ```

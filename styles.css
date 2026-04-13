@@ -56,6 +56,22 @@ body {
   gap: 16px;
 }
 
+.error-msg {
+  margin: 0;
+  padding: 0;
+  font-size: 0.9rem;
+  color: #ff6b6b;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s, max-height 0.3s;
+}
+
+.error-msg.visible {
+  opacity: 1;
+  max-height: 40px;
+}
+
 .search-label {
   font-size: 0.95rem;
   letter-spacing: 0.08em;
@@ -116,6 +132,7 @@ button[type="submit"]:hover {
   padding: 20px 18px 18px;
   border-radius: 28px;
   max-width: 360px;
+  min-height: 280px;
   width: 100%;
   background: linear-gradient(180deg, #ffffff 0%, #f6f8ff 100%);
   box-shadow: 0 20px 40px rgba(4, 31, 88, 0.12);
@@ -159,15 +176,19 @@ button[type="submit"]:hover {
 
 .card-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 28px;
+  gap: 8px;
+  margin-bottom: 20px;
+  margin-top: 14px;
 }
 
 .card-title {
-  font-size: 25px;
+  font-size: clamp(0.9rem, 4vw, 1.1rem);
   font-weight: 700;
+  line-height: 1.2;
+  word-break: break-word;
+  margin: 0;
 }
 
 .card-country {
@@ -177,7 +198,6 @@ button[type="submit"]:hover {
   min-width: 42px;
   padding: 6px 10px;
   border-radius: 999px;
-  background: #f8f9ff;
   color: #20315c;
   font-size: 0.85rem;
   font-weight: 700;
