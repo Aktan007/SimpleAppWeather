@@ -29,4 +29,4 @@
 - `styles.css` — стили дизайна
 - `script.js` — JavaScript-логика
 
-![Maintainability](https://api.codeclimate.com/v1/badges/qltp_bYiibiA6exJoPFaw9FAHhBrkMiJnjnhcPiUUHn0s/maintainability)
+[![Maintainability](https://qlty.sh/gh/Aktan007/projects/SimpleAppWeather/maintainability.svg)](https://qlty.sh/gh/Aktan007/projects/SimpleAppWeather)
