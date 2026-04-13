@@ -28,3 +28,5 @@
 - `index.html` — разметка страницы
 - `styles.css` — стили дизайна
 - `script.js` — JavaScript-логика
+
+![Maintainability](https://api.codeclimate.com/v1/badges/ВАШ_ТОКЕН/maintainability)
