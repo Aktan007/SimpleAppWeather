@@ -10,7 +10,6 @@ const errorMsg = document.getElementById('error-msg');
 let isCelsius = true;
 let citiesData = [];
 
-// localStorage
 const STORAGE_KEY = 'weatherCities';
 
 const saveCities = () => {

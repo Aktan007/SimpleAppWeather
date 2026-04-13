@@ -134,7 +134,7 @@ button[type="submit"]:hover {
   max-width: 360px;
   min-height: 280px;
   width: 100%;
-  background: linear-gradient(180deg, #ffffff 0%, #f6f8ff 100%);
+  background: linear-gradient(180deg, #8e90ad 0%, #f6f8ff 100%);
   box-shadow: 0 20px 40px rgba(4, 31, 88, 0.12);
   color: #151f3d;
   animation: cardFadeIn 0.4s ease-out;
