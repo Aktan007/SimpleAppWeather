@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simple Weather App</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <main class="app-shell">
+      <section class="hero">
+        <h1>Simple Weather App</h1>
+        <form id="search-form" class="search-form">
+          <label class="search-label" for="city-input">Search for a city</label>
+          <div class="input-wrap">
+            <input id="city-input" type="text" placeholder="Введите город" autocomplete="off" />
+            <button type="submit">SUBMIT</button>
+          </div>
+        </form>
+      </section>
+
+      <section id="cards" class="cards"></section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

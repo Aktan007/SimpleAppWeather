@@ -1,0 +1,225 @@
+:root {
+  color-scheme: dark;
+  --bg: #071540;
+  --surface: #0d1a3c;
+  --panel: #ffffff;
+  --panel-shadow: rgba(1, 32, 89, 0.12);
+  --text: #ffffff;
+  --muted: #94a0c1;
+  --accent: #ff2c54;
+  --accent-soft: #ff2c54;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.08), transparent 24%),
+              radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.05), transparent 18%),
+              var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+}
+
+.page {
+  width: min(1120px, 100%);
+}
+
+.app-shell {
+  display: grid;
+  gap: 36px;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+}
+
+.search-form {
+  display: grid;
+  gap: 16px;
+}
+
+.search-label {
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.input-wrap {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+#city-input {
+  flex: 1 1 240px;
+  min-width: 220px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+#city-input::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+button[type="submit"] {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0 24px;
+  min-height: 48px;
+  cursor: pointer;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+button[type="submit"]:hover {
+  filter: brightness(1.05);
+}
+
+.cards {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
+  width: min(100%, calc(3 * 360px + 48px));
+  justify-content: start;
+  align-items: start;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  align-self: start;
+  padding: 20px 18px 18px;
+  border-radius: 28px;
+  max-width: 360px;
+  width: 100%;
+  background: linear-gradient(180deg, #ffffff 0%, #f6f8ff 100%);
+  box-shadow: 0 20px 40px rgba(4, 31, 88, 0.12);
+  color: #151f3d;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at top right, rgba(255,255,255,0.65), transparent 42%);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.card-country {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 42px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #f8f9ff;
+  color: #20315c;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.temperature {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: clamp(3.4rem, 5vw, 5rem);
+  font-weight: 800;
+  margin: 0;
+}
+
+.temperature span {
+  font-size: 1.2rem;
+}
+
+.weather-icon {
+  width: 88px;
+  height: 88px;
+  margin: 16px 0;
+}
+
+.weather-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.description {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.88rem;
+  color: #556487;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+  color: #7d8caa;
+  font-size: 0.95rem;
+}
+
+.status::before {
+  content: "⚠️";
+  font-size: 0.95rem;
+  opacity: 0;
+}
+
+.status.error {
+  color: #c84747;
+}
+
+.status.error::before {
+  content: "❌";
+  opacity: 1;
+}
+
+@media (max-width: 520px) {
+  body {
+    padding: 18px;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+}
