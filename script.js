@@ -1,5 +1,3 @@
-// Вставь сюда свой API-ключ OpenWeatherMap:
-// Например: const API_KEY = '123abc45def...';
 const API_KEY = '96d674dd28b014ce1aad7367969978f0';
 const API_URL = 'https://api.openweathermap.org/data/2.5/weather';
 
