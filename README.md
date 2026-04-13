@@ -1,3 +1,9 @@
+
+
+https://github.com/user-attachments/assets/0c15b2e5-36b6-40bb-ba3a-66199ac94f70
+
+
+
 # Simple Weather App
 
 Простое приложение на Vanilla JavaScript для поиска погоды по городу.
