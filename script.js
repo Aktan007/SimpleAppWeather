@@ -4,29 +4,66 @@ const API_URL = 'https://api.openweathermap.org/data/2.5/weather';
 const form = document.getElementById('search-form');
 const cityInput = document.getElementById('city-input');
 const cardsContainer = document.getElementById('cards');
+const unitToggle = document.getElementById('unit-toggle');
 
-const createCard = (weather) => {
+// Состояние приложения
+let isCelsius = true;
+let citiesData = [];
+
+// localStorage
+const STORAGE_KEY = 'weatherCities';
+
+const saveCities = () => {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(citiesData));
+};
+
+const loadCities = () => {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  return saved ? JSON.parse(saved) : [];
+};
+
+// Конвертация температуры
+const toFahrenheit = (celsius) => Math.round(celsius * 9 / 5 + 32);
+const getTemp = (tempC) => isCelsius ? Math.round(tempC) : toFahrenheit(tempC);
+const getUnit = () => isCelsius ? '°C' : '°F';
+
+const createCard = (weather, index) => {
   const card = document.createElement('article');
   card.className = 'card';
+  card.dataset.index = index;
 
-  const temp = Math.round(weather.main.temp);
+  const temp = getTemp(weather.main.temp);
   const condition = weather.weather[0];
   const iconUrl = `https://openweathermap.org/img/wn/${condition.icon}@4x.png`;
   const description = condition.description.toUpperCase();
 
   card.innerHTML = `
+    <button class="card-delete" title="Удалить">&times;</button>
     <div class="card-header">
       <div>
         <h2 class="card-title">${weather.name}</h2>
       </div>
       <span class="card-country">${weather.sys.country}</span>
     </div>
-    <p class="temperature">${temp}<span>°C</span></p>
+    <p class="temperature" data-temp-c="${weather.main.temp}">${temp}<span>${getUnit()}</span></p>
     <div class="weather-icon">
       <img src="${iconUrl}" alt="${condition.description}" />
     </div>
     <p class="description">${description}</p>
   `;
+
+  card.querySelector('.card-delete').addEventListener('click', () => {
+    card.classList.add('card-removing');
+    card.addEventListener('animationend', () => {
+      const currentIndex = parseInt(card.dataset.index, 10);
+      citiesData.splice(currentIndex, 1);
+      saveCities();
+      card.remove();
+      document.querySelectorAll('.card').forEach((c, i) => {
+        c.dataset.index = i;
+      });
+    }, { once: true });
+  });
 
   return card;
 };
@@ -43,8 +80,20 @@ const createErrorCard = (message) => {
   return card;
 };
 
-const updateCards = (items) => {
-  items.forEach((item) => cardsContainer.appendChild(item));
+const renderAllCards = () => {
+  cardsContainer.innerHTML = '';
+  citiesData.forEach((weather, index) => {
+    cardsContainer.appendChild(createCard(weather, index));
+  });
+};
+
+const updateTemperatures = () => {
+  document.querySelectorAll('.temperature').forEach((el) => {
+    const tempC = parseFloat(el.dataset.tempC);
+    if (!isNaN(tempC)) {
+      el.innerHTML = `${getTemp(tempC)}<span>${getUnit()}</span>`;
+    }
+  });
 };
 
 const fetchWeather = async (city) => {
@@ -65,6 +114,12 @@ const fetchWeather = async (city) => {
   return data;
 };
 
+unitToggle.addEventListener('click', () => {
+  isCelsius = !isCelsius;
+  unitToggle.textContent = isCelsius ? '°C / °F' : '°F / °C';
+  updateTemperatures();
+});
+
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
   const city = cityInput.value.trim();
@@ -73,16 +128,17 @@ form.addEventListener('submit', async (event) => {
     return;
   }
 
-  const loadingCard = createErrorCard('Загрузка...');
-  loadingCard.querySelector('.description').classList.remove('description');
-  cardsContainer.appendChild(loadingCard);
-
   try {
     const weather = await fetchWeather(city);
-    loadingCard.remove();
-    updateCards([createCard(weather)]);
+    citiesData.push(weather);
+    saveCities();
+    renderAllCards();
+    cityInput.value = '';
   } catch (error) {
-    loadingCard.remove();
-    updateCards([createErrorCard(error.message)]);
+    cardsContainer.appendChild(createErrorCard(error.message));
   }
 });
+
+
+citiesData = loadCities();
+renderAllCards();
