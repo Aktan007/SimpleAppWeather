@@ -29,4 +29,4 @@
 - `styles.css` — стили дизайна
 - `script.js` — JavaScript-логика
 
-![Maintainability](https://api.codeclimate.com/v1/badges/edebbcca-b786-4074-bfaf-17ddc9dc5a44/maintainability)
+![Maintainability](https://api.codeclimate.com/v1/badges/qltp_bYiibiA6exJoPFaw9FAHhBrkMiJnjnhcPiUUHn0s/maintainability)
