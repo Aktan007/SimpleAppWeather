@@ -26,4 +26,6 @@
 - `styles.css` — стили дизайна
 - `script.js` — JavaScript-логика
 
+<video controls src="Aktan007_SimpleAppWeather - Google Chrome 2026-04-13 22-50-58.mp4" title="Title"></video>
+
 [![Maintainability](https://qlty.sh/gh/Aktan007/projects/SimpleAppWeather/maintainability.svg)](https://qlty.sh/gh/Aktan007/projects/SimpleAppWeather)
